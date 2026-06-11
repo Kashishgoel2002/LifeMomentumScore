@@ -154,8 +154,8 @@ import ModeSwitcher from '../components/ModeSwitcher.astro';
     $('today-list').innerHTML = entries.map((e) => {
       const tone = e.score >= 0 ? 'text-positive' : 'text-negative';
       return `<li class="card flex items-center gap-3 p-3" data-id="${e.id}">
-          <span class="h-2 w-2 rounded-full ${e.score >= 0 ? 'bg-positive' : 'bg-negative'}"></span>
-          <span class="flex-1 text-sm">${esc(e.habitName)}</span>
+          <span class="h-2 w-2 shrink-0 rounded-full ${e.score >= 0 ? 'bg-positive' : 'bg-negative'}"></span>
+          <span class="min-w-0 flex-1 truncate text-sm">${esc(e.habitName)}</span>
           <span class="font-mono text-xs text-mute">${e.time}</span>
           <span class="font-mono text-sm ${tone}">${signed(e.score)}</span>
           <button class="del-entry grid h-8 w-8 place-items-center rounded-md text-mute transition-colors hover:bg-negative-soft hover:text-negative" aria-label="Delete entry">

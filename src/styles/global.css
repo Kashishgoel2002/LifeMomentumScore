@@ -74,6 +74,18 @@
     color: var(--color-canvas);
   }
 
+  /* Snappier taps on touch devices; tame the default flash. */
+  button, a, [role="switch"], select, summary {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Anchored sections clear the sticky header. */
+  #main { scroll-margin-top: 5rem; }
+
+  /* Align figures in number columns. */
+  .font-mono { font-variant-numeric: tabular-nums; }
+
   :focus-visible {
     outline: 2px solid var(--color-ink);
     outline-offset: 2px;
