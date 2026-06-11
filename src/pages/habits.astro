@@ -1,0 +1,169 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+---
+
+<Layout
+  title="Habit Library"
+  description="Customize your habit library — edit scores, disable habits you don't use, and create your own."
+>
+  <div class="container-page py-12 sm:py-16">
+    <PageHeader
+      eyebrow="Manage"
+      title="Habit library"
+      subtitle="Edit any score, disable what you don't use, or add your own. Default habits can be disabled but not deleted."
+    >
+      <button slot="actions" id="reset-btn" class="btn btn-secondary btn-sm">Reset to defaults</button>
+    </PageHeader>
+
+    <!-- Add custom habit -->
+    <form id="add-form" class="card mt-10 p-5">
+      <p class="eyebrow mb-4">New custom habit</p>
+      <div class="grid gap-3 sm:grid-cols-[1fr_auto_auto] sm:items-end">
+        <div>
+          <label for="new-name" class="mb-1.5 block text-xs text-body">Habit name</label>
+          <input id="new-name" name="name" class="input" placeholder="e.g. Journaling" required maxlength="40" autocomplete="off" />
+        </div>
+        <div>
+          <label for="new-score" class="mb-1.5 block text-xs text-body">Score</label>
+          <input id="new-score" name="score" type="number" class="input sm:w-28" placeholder="+5" required value="5" min="-50" max="50" step="1" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-sm h-10">Add habit</button>
+      </div>
+      <p class="mt-2 text-xs text-mute">Use a negative number for a habit that subtracts momentum.</p>
+    </form>
+
+    <!-- Two columns: positive / negative -->
+    <div class="mt-10 grid gap-8 lg:grid-cols-2">
+      <section aria-labelledby="pos-heading">
+        <div class="mb-3 flex items-center justify-between">
+          <h2 id="pos-heading" class="text-sm font-medium text-ink">Positive habits</h2>
+          <span class="badge"><span class="h-1.5 w-1.5 rounded-full bg-positive"></span><span id="pos-count">0</span></span>
+        </div>
+        <ul id="pos-list" class="space-y-2"></ul>
+      </section>
+
+      <section aria-labelledby="neg-heading">
+        <div class="mb-3 flex items-center justify-between">
+          <h2 id="neg-heading" class="text-sm font-medium text-ink">Negative habits</h2>
+          <span class="badge"><span class="h-1.5 w-1.5 rounded-full bg-negative"></span><span id="neg-count">0</span></span>
+        </div>
+        <ul id="neg-list" class="space-y-2"></ul>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { store } from '../lib/store';
+  import type { Habit } from '../lib/types';
+
+  const posList = document.getElementById('pos-list')!;
+  const negList = document.getElementById('neg-list')!;
+  const posCount = document.getElementById('pos-count')!;
+  const negCount = document.getElementById('neg-count')!;
+
+  function habitRow(h: Habit): string {
+    const tone = h.type === 'positive' ? 'text-positive' : 'text-negative';
+    const disabledClass = h.enabled ? '' : 'opacity-50';
+    return `
+      <li class="card flex items-center gap-3 p-3 ${disabledClass}" data-id="${h.id}">
+        <button
+          class="toggle-btn relative h-6 w-10 shrink-0 rounded-full transition-colors ${h.enabled ? 'bg-ink' : 'bg-surface-3'}"
+          role="switch" aria-checked="${h.enabled}" aria-label="Toggle ${escapeHtml(h.name)}"
+        >
+          <span class="absolute top-0.5 h-5 w-5 rounded-full bg-canvas transition-all ${h.enabled ? 'left-[18px]' : 'left-0.5'}"></span>
+        </button>
+        <input
+          class="name-input input h-9 flex-1 bg-transparent shadow-none px-2"
+          value="${escapeHtml(h.name)}" maxlength="40" aria-label="Habit name"
+        />
+        <input
+          class="score-input input h-9 w-20 text-center font-mono ${tone}"
+          type="number" value="${h.score}" min="-50" max="50" step="1" aria-label="Score"
+        />
+        ${h.custom
+          ? `<button class="delete-btn grid h-9 w-9 shrink-0 place-items-center rounded-md text-mute transition-colors hover:bg-negative-soft hover:text-negative" aria-label="Delete ${escapeHtml(h.name)}">
+               <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 4h10M6.5 4V3h3v1M5 4l.5 9h5L11 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+             </button>`
+          : `<span class="grid h-9 w-9 shrink-0 place-items-center text-mute" title="Default habit"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 8l2 2 4-4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.1"/></svg></span>`
+        }
+      </li>`;
+  }
+
+  function escapeHtml(s: string): string {
+    return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
+  }
+
+  function render() {
+    const habits = store.getHabits();
+    const pos = habits.filter((h) => h.type === 'positive');
+    const neg = habits.filter((h) => h.type === 'negative');
+    posList.innerHTML = pos.map(habitRow).join('') || emptyMsg();
+    negList.innerHTML = neg.map(habitRow).join('') || emptyMsg();
+    posCount.textContent = String(pos.length);
+    negCount.textContent = String(neg.length);
+  }
+
+  function emptyMsg() {
+    return `<li class="rounded-lg border border-dashed border-hairline p-6 text-center text-sm text-mute">No habits here yet.</li>`;
+  }
+
+  // Event delegation for both lists.
+  function wire(list: HTMLElement) {
+    list.addEventListener('click', (e) => {
+      const li = (e.target as HTMLElement).closest('li[data-id]') as HTMLElement | null;
+      if (!li) return;
+      const id = li.dataset.id!;
+      if ((e.target as HTMLElement).closest('.toggle-btn')) {
+        const h = store.getHabits().find((x) => x.id === id);
+        if (h) store.updateHabit(id, { enabled: !h.enabled });
+      } else if ((e.target as HTMLElement).closest('.delete-btn')) {
+        const h = store.getHabits().find((x) => x.id === id);
+        if (h && confirm(`Delete "${h.name}"? Past entries are kept.`)) store.deleteHabit(id);
+      }
+    });
+
+    list.addEventListener('change', (e) => {
+      const li = (e.target as HTMLElement).closest('li[data-id]') as HTMLElement | null;
+      if (!li) return;
+      const id = li.dataset.id!;
+      const target = e.target as HTMLInputElement;
+      if (target.classList.contains('name-input')) {
+        const name = target.value.trim();
+        if (name) store.updateHabit(id, { name });
+        else render();
+      } else if (target.classList.contains('score-input')) {
+        const score = parseInt(target.value, 10);
+        if (!Number.isNaN(score)) store.updateHabit(id, { score });
+        else render();
+      }
+    });
+  }
+
+  wire(posList);
+  wire(negList);
+
+  // Add form
+  const addForm = document.getElementById('add-form') as HTMLFormElement;
+  addForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = (document.getElementById('new-name') as HTMLInputElement).value.trim();
+    const score = parseInt((document.getElementById('new-score') as HTMLInputElement).value, 10);
+    if (!name || Number.isNaN(score)) return;
+    store.addHabit(name, score);
+    addForm.reset();
+    (document.getElementById('new-score') as HTMLInputElement).value = '5';
+    (document.getElementById('new-name') as HTMLInputElement).focus();
+  });
+
+  // Reset
+  document.getElementById('reset-btn')!.addEventListener('click', () => {
+    if (confirm('Reset the habit library to defaults? Your custom habits will be removed. Logged entries are kept.')) {
+      store.resetHabits();
+    }
+  });
+
+  store.onChange(render);
+  render();
+</script>

@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="About"
+  description="Why Life Momentum Score measures net momentum instead of streaks — and the philosophy behind delayed score reveals."
+>
+  <article class="container-page py-20 sm:py-24">
+    <div class="mx-auto max-w-2xl">
+      <p class="eyebrow">About</p>
+      <h1 class="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">
+        Momentum, not streaks.
+      </h1>
+
+      <div class="mt-10 space-y-10">
+        <section>
+          <h2 class="text-xl font-semibold tracking-tight">The idea</h2>
+          <p class="mt-3 text-base leading-relaxed text-body">
+            Most habit trackers celebrate streaks and completion percentages. They tell you what you
+            did well and quietly ignore everything working against you. The result is a flattering,
+            incomplete picture.
+          </p>
+          <p class="mt-4 text-base leading-relaxed text-body">
+            Life Momentum Score takes a different stance. It treats your week as a single ledger:
+            positive habits add momentum, negative habits subtract it, and the score you see is the
+            honest net effect. You might log five workouts and still end the week in the negative —
+            and that is exactly the kind of insight a streak counter will never give you.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold tracking-tight">Why delayed reveals</h2>
+          <p class="mt-3 text-base leading-relaxed text-body">
+            Checking a number every day turns reflection into a reflex. You start optimizing for the
+            score instead of understanding your behavior. Weekly and Monthly reveal modes hide the
+            number until the period ends, so you log honestly in the moment and confront the result
+            with fresh eyes.
+          </p>
+          <blockquote class="mt-5 border-l-2 border-hairline-strong pl-4 text-base italic text-body">
+            "Delayed score reveals help reduce daily bias and encourage more honest self-reflection."
+          </blockquote>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold tracking-tight">Private by design</h2>
+          <p class="mt-3 text-base leading-relaxed text-body">
+            This is version one. There are no accounts, no logins, and no servers. Every habit and
+            entry is stored in your browser using localStorage, which means your data never leaves
+            your device and the app keeps working after every refresh. Future versions may add
+            optional cloud sync — but the default will always respect your privacy.
+          </p>
+        </section>
+      </div>
+
+      <div class="mt-12 flex flex-col gap-3 sm:flex-row">
+        <a href="/dashboard" class="btn btn-primary inline-flex">Start Tracking</a>
+        <a href="/features" class="btn btn-secondary inline-flex">Explore features</a>
+      </div>
+    </div>
+  </article>
+</Layout>

@@ -1,11 +1,106 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import FeatureCard from '../components/marketing/FeatureCard.astro';
+import CategoryLadder from '../components/CategoryLadder.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const features = [
+  {
+    eyebrow: '01 / Net momentum',
+    title: 'Both sides of the ledger',
+    body: 'Positive habits add momentum. Negative habits subtract it. Your score is the honest net effect — not a streak you can game.',
+  },
+  {
+    eyebrow: '02 / Delayed reveal',
+    title: 'Reduce daily bias',
+    body: 'Hide your score and reveal it weekly or monthly. Distance from the daily number encourages more honest self-reflection.',
+  },
+  {
+    eyebrow: '03 / A behavioral record',
+    title: 'A calendar of your actions',
+    body: 'Every entry is timestamped and stored. Browse any day, edit history, and watch your trajectory take shape over time.',
+  },
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Life Momentum Score">
+  <!-- Hero -->
+  <section class="relative overflow-hidden border-b border-hairline">
+    <div
+      class="pointer-events-none absolute inset-x-0 top-0 h-[420px] mesh-gradient opacity-[0.22] blur-2xl"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="container-page relative py-24 text-center sm:py-32">
+      <p class="badge mx-auto w-fit animate-rise">
+        <span class="h-1.5 w-1.5 rounded-full bg-positive"></span>
+        No account needed · Data stays on your device
+      </p>
+      <h1 class="mx-auto mt-6 max-w-3xl text-4xl font-semibold tracking-tight sm:text-6xl animate-rise">
+        Measure the direction of your life.
+      </h1>
+      <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-body animate-rise">
+        Most people track good habits. Few measure the impact of bad ones.
+        Life Momentum Score helps you understand your true trajectory.
+      </p>
+      <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href="/dashboard" class="btn btn-primary w-full sm:w-auto">Start Tracking</a>
+        <a href="/features" class="btn btn-secondary w-full sm:w-auto">See how it works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- The core idea -->
+  <section class="container-page py-20 sm:py-28">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="eyebrow">The problem</p>
+      <h2 class="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+        "I thought I had a productive week."
+      </h2>
+      <p class="mt-5 text-base leading-relaxed text-body">
+        Traditional habit trackers reward streaks and completion percentages — but they ignore the
+        habits quietly working against you. Life Momentum Score asks a different question:
+        <span class="text-ink">are your daily actions creating positive or negative momentum?</span>
+      </p>
+    </div>
+
+    <div class="mt-14 grid gap-4 md:grid-cols-3">
+      {features.map((f) => (
+        <FeatureCard eyebrow={f.eyebrow} title={f.title} body={f.body} />
+      ))}
+    </div>
+  </section>
+
+  <!-- Score categories -->
+  <section class="border-y border-hairline bg-surface/30">
+    <div class="container-page grid gap-12 py-20 sm:py-28 lg:grid-cols-2 lg:items-center">
+      <div>
+        <p class="eyebrow">The scale</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+          Six bands of momentum.
+        </h2>
+        <p class="mt-5 max-w-md text-base leading-relaxed text-body">
+          Your net score maps to a clear category — from Negative Momentum to Thriving. It is a
+          mirror, not a leaderboard. The goal is awareness, not a high score.
+        </p>
+        <a href="/dashboard" class="btn btn-secondary btn-sm mt-7 inline-flex">Open your dashboard</a>
+      </div>
+      <CategoryLadder />
+    </div>
+  </section>
+
+  <!-- CTA band (polarity-flipped dark) -->
+  <section class="container-page py-20 sm:py-28">
+    <div class="card relative overflow-hidden p-10 text-center sm:p-16">
+      <div class="pointer-events-none absolute inset-0 mesh-gradient opacity-[0.14]" aria-hidden="true"></div>
+      <div class="relative">
+        <h2 class="mx-auto max-w-xl text-3xl font-semibold tracking-tight sm:text-4xl">
+          Start measuring your trajectory today.
+        </h2>
+        <p class="mx-auto mt-4 max-w-md text-base text-body">
+          Free, private, and works instantly in your browser. No sign up, no backend.
+        </p>
+        <a href="/dashboard" class="btn btn-primary mt-8 inline-flex">Start Tracking</a>
+      </div>
+    </div>
+  </section>
 </Layout>

@@ -1,0 +1,33 @@
+---
+import { SCORE_CATEGORIES } from '../lib/score';
+
+const ranges: Record<string, string> = {
+  thriving: '+100 and above',
+  strong: '+50 to +99',
+  forward: '0 to +49',
+  stagnating: '-1 to -49',
+  declining: '-50 to -99',
+  negative: 'Below -100',
+};
+
+const toneDot: Record<string, string> = {
+  positive: 'bg-positive',
+  neutral: 'bg-mute',
+  negative: 'bg-negative',
+};
+---
+
+<ul class="divide-y divide-hairline overflow-hidden rounded-lg" style="box-shadow: inset 0 0 0 1px var(--color-hairline);">
+  {SCORE_CATEGORIES.map((c) => (
+    <li class="flex items-center justify-between gap-4 bg-surface px-5 py-4">
+      <div class="flex items-center gap-3">
+        <span class:list={['h-2 w-2 rounded-full', toneDot[c.tone]]} aria-hidden="true"></span>
+        <div>
+          <p class="text-sm font-medium text-ink">{c.label}</p>
+          <p class="text-xs text-mute">{c.blurb}</p>
+        </div>
+      </div>
+      <span class="font-mono text-xs text-body whitespace-nowrap">{ranges[c.key]}</span>
+    </li>
+  ))}
+</ul>

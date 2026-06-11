@@ -1,0 +1,59 @@
+---
+const year = new Date().getFullYear();
+const cols = [
+  {
+    title: 'Product',
+    links: [
+      { href: '/dashboard', label: 'Dashboard' },
+      { href: '/habits', label: 'Habits' },
+      { href: '/calendar', label: 'Calendar' },
+      { href: '/review', label: 'Review' },
+    ],
+  },
+  {
+    title: 'Learn',
+    links: [
+      { href: '/features', label: 'Features' },
+      { href: '/about', label: 'About' },
+    ],
+  },
+];
+---
+
+<footer class="border-t border-hairline">
+  <div class="container-page grid gap-10 py-16 sm:grid-cols-2 md:grid-cols-4">
+    <div class="md:col-span-2">
+      <div class="flex items-center gap-2.5">
+        <span class="grid h-7 w-7 place-items-center rounded-md mesh-gradient">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 11.5L6 6.5L9 9L14 3.5" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="text-sm font-medium tracking-tight">Life Momentum Score</span>
+      </div>
+      <p class="mt-4 max-w-xs text-sm text-body">
+        Measure whether your daily actions create positive or negative momentum in your life.
+      </p>
+    </div>
+
+    {cols.map((col) => (
+      <div>
+        <p class="eyebrow">{col.title}</p>
+        <ul class="mt-4 space-y-2.5">
+          {col.links.map((l) => (
+            <li>
+              <a href={l.href} class="text-sm text-body transition-colors hover:text-ink">{l.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+
+  <div class="border-t border-hairline">
+    <div class="container-page flex flex-col gap-2 py-6 text-xs text-mute sm:flex-row sm:items-center sm:justify-between">
+      <p>© {year} Life Momentum Score</p>
+      <p class="font-mono">Data stays on your device · localStorage</p>
+    </div>
+  </div>
+</footer>

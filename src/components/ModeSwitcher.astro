@@ -1,0 +1,51 @@
+---
+const modes = [
+  { key: 'live', label: 'Live' },
+  { key: 'weekly', label: 'Weekly' },
+  { key: 'monthly', label: 'Monthly' },
+];
+---
+
+<div
+  id="mode-switcher"
+  class="inline-flex rounded-full bg-surface-2 p-1"
+  style="box-shadow: inset 0 0 0 1px var(--color-hairline);"
+  role="group"
+  aria-label="Tracking mode"
+>
+  {modes.map((m) => (
+    <button
+      type="button"
+      data-mode={m.key}
+      class="mode-opt rounded-full px-4 py-1.5 text-sm font-medium text-body transition-colors"
+      aria-pressed="false"
+    >
+      {m.label}
+    </button>
+  ))}
+</div>
+
+<script>
+  import { store } from '../lib/store';
+
+  const root = document.getElementById('mode-switcher')!;
+  const opts = Array.from(root.querySelectorAll<HTMLButtonElement>('.mode-opt'));
+
+  function sync() {
+    const mode = store.getSettings().trackingMode;
+    for (const opt of opts) {
+      const active = opt.dataset.mode === mode;
+      opt.setAttribute('aria-pressed', String(active));
+      opt.classList.toggle('bg-ink', active);
+      opt.classList.toggle('text-on-primary', active);
+      opt.classList.toggle('text-body', !active);
+    }
+  }
+
+  for (const opt of opts) {
+    opt.addEventListener('click', () => store.setMode(opt.dataset.mode as any));
+  }
+
+  store.onChange(sync);
+  sync();
+</script>
