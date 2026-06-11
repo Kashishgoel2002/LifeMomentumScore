@@ -1,0 +1,255 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ModeSwitcher from '../components/ModeSwitcher.astro';
+---
+
+<Layout
+  title="Dashboard"
+  description="Your live momentum at a glance — today's actions, weekly progress, and your running Life Momentum Score."
+>
+  <div class="container-page py-12 sm:py-16">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p class="eyebrow">Dashboard</p>
+        <h1 class="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">Your momentum</h1>
+      </div>
+      <ModeSwitcher />
+    </div>
+
+    <!-- Headline score -->
+    <section class="card relative mt-8 overflow-hidden p-6 sm:p-8" aria-live="polite">
+      <div id="headline-mesh" class="pointer-events-none absolute inset-0 mesh-gradient opacity-[0.10]" aria-hidden="true"></div>
+      <div id="headline" class="relative"></div>
+    </section>
+
+    <!-- Stat cards -->
+    <section class="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-4" id="stats"></section>
+
+    <div class="mt-10 grid gap-8 lg:grid-cols-5">
+      <!-- Quick add + today -->
+      <div class="lg:col-span-3 space-y-8">
+        <section aria-labelledby="qa-heading">
+          <h2 id="qa-heading" class="text-sm font-medium text-ink">Quick add — log to today</h2>
+          <p class="mt-1 text-xs text-mute">Tap a habit to record it now.</p>
+          <div id="quick-add" class="mt-4 flex flex-wrap gap-2"></div>
+        </section>
+
+        <section aria-labelledby="today-heading">
+          <div class="flex items-center justify-between">
+            <h2 id="today-heading" class="text-sm font-medium text-ink">Logged today</h2>
+            <a href="/calendar" class="text-xs text-body transition-colors hover:text-ink">Open calendar →</a>
+          </div>
+          <ul id="today-list" class="mt-4 space-y-2"></ul>
+        </section>
+      </div>
+
+      <!-- Progress + previous -->
+      <div class="lg:col-span-2 space-y-8">
+        <section class="card p-5" aria-labelledby="prog-heading">
+          <h2 id="prog-heading" class="text-sm font-medium text-ink">This week</h2>
+          <div id="progress" class="mt-5"></div>
+        </section>
+
+        <section class="card p-5" aria-labelledby="prev-heading">
+          <h2 id="prev-heading" class="text-sm font-medium text-ink">Previous scores</h2>
+          <div id="previous" class="mt-4"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { store } from '../lib/store';
+  import { categoryFor, signed } from '../lib/score';
+  import { currentWeek, currentMonth, pastWeeks, pastMonths, dailyNets } from '../lib/periods';
+  import type { Period } from '../lib/periods';
+  import type { Entry, Habit } from '../lib/types';
+
+  const $ = (id: string) => document.getElementById(id)!;
+
+  function esc(s: string): string {
+    return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
+  }
+
+  const toneClass = { positive: 'text-positive', neutral: 'text-ink', negative: 'text-negative' } as const;
+
+  function renderHeadline(period: Period, mode: string, kindLabel: string) {
+    const hidden = mode !== 'live';
+    const cat = categoryFor(period.totals.net);
+    $('headline-mesh').style.opacity = hidden ? '0.05' : '0.12';
+
+    if (hidden) {
+      $('headline').innerHTML = `
+        <p class="eyebrow">${kindLabel} · ${esc(period.label)}</p>
+        <div class="mt-3 flex items-center gap-3">
+          <span class="grid h-9 w-9 place-items-center rounded-full bg-surface-2" style="box-shadow: inset 0 0 0 1px var(--color-hairline);">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 7V5a4 4 0 018 0v2M3.5 7h9v6h-9z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <p class="text-xl font-semibold tracking-tight">Score hidden until this ${kindLabel.toLowerCase()} ends</p>
+        </div>
+        <p class="mt-3 max-w-md text-sm text-body">Delayed reveals reduce daily bias and encourage more honest self-reflection. Keep logging — you'll see the result on the <a href="/review" class="text-ink underline underline-offset-2">Review</a> page when the period closes.</p>
+        <div class="mt-5 flex gap-6 text-sm">
+          <div><span class="font-mono text-lg text-ink">${period.totals.count}</span><span class="ml-1.5 text-mute">entries</span></div>
+          <div><span class="font-mono text-lg text-ink">${period.daysTracked}</span><span class="ml-1.5 text-mute">days tracked</span></div>
+        </div>`;
+      return;
+    }
+
+    $('headline').innerHTML = `
+      <p class="eyebrow">${kindLabel} momentum · ${esc(period.label)}</p>
+      <div class="mt-3 flex flex-wrap items-end gap-x-4 gap-y-2">
+        <span class="text-5xl font-semibold tracking-tight ${toneClass[cat.tone]} sm:text-6xl">${signed(period.totals.net)}</span>
+        <span class="badge mb-2"><span class="h-1.5 w-1.5 rounded-full ${cat.tone === 'positive' ? 'bg-positive' : cat.tone === 'negative' ? 'bg-negative' : 'bg-mute'}"></span>${cat.label}</span>
+      </div>
+      <p class="mt-3 max-w-md text-sm text-body">${cat.blurb}</p>`;
+  }
+
+  function statCard(value: string, label: string, tone = 'text-ink') {
+    return `<div class="card p-4">
+        <p class="font-mono text-2xl font-semibold ${tone}">${value}</p>
+        <p class="mt-1 text-xs text-body">${label}</p>
+      </div>`;
+  }
+
+  function renderStats(period: Period, todayCount: number, mode: string) {
+    const t = period.totals;
+    if (mode === 'live') {
+      $('stats').innerHTML =
+        statCard(signed(t.positive), 'Positive points', 'text-positive') +
+        statCard(t.negative === 0 ? '0' : signed(t.negative), 'Negative points', 'text-negative') +
+        statCard(String(todayCount), 'Logged today') +
+        statCard(String(period.daysTracked), 'Days tracked');
+    } else {
+      $('stats').innerHTML =
+        statCard(String(t.count), 'Entries this period') +
+        statCard(String(period.daysTracked), 'Days tracked') +
+        statCard(String(t.positiveCount), 'Positive actions', 'text-positive') +
+        statCard(String(t.negativeCount), 'Negative actions', 'text-negative');
+    }
+  }
+
+  function renderQuickAdd() {
+    const habits = store.getEnabledHabits();
+    if (habits.length === 0) {
+      $('quick-add').innerHTML = `<a href="/habits" class="text-sm text-body underline underline-offset-2">Enable some habits to start →</a>`;
+      return;
+    }
+    $('quick-add').innerHTML = habits.map((h: Habit) => {
+      const tone = h.type === 'positive'
+        ? 'hover:bg-positive-soft hover:text-positive'
+        : 'hover:bg-negative-soft hover:text-negative';
+      const sign = h.type === 'positive' ? 'text-positive' : 'text-negative';
+      return `<button data-id="${h.id}" class="qa-btn group inline-flex items-center gap-2 rounded-full bg-surface-2 px-3.5 py-2 text-sm text-ink transition-colors ${tone}" style="box-shadow: inset 0 0 0 1px var(--color-hairline);">
+          ${esc(h.name)} <span class="font-mono text-xs ${sign}">${signed(h.score)}</span>
+        </button>`;
+    }).join('');
+  }
+
+  function renderToday(entries: Entry[]) {
+    if (entries.length === 0) {
+      $('today-list').innerHTML = `<li class="rounded-lg border border-dashed border-hairline p-6 text-center text-sm text-mute">Nothing logged yet today. Use quick add above.</li>`;
+      return;
+    }
+    $('today-list').innerHTML = entries.map((e) => {
+      const tone = e.score >= 0 ? 'text-positive' : 'text-negative';
+      return `<li class="card flex items-center gap-3 p-3" data-id="${e.id}">
+          <span class="h-2 w-2 rounded-full ${e.score >= 0 ? 'bg-positive' : 'bg-negative'}"></span>
+          <span class="flex-1 text-sm">${esc(e.habitName)}</span>
+          <span class="font-mono text-xs text-mute">${e.time}</span>
+          <span class="font-mono text-sm ${tone}">${signed(e.score)}</span>
+          <button class="del-entry grid h-8 w-8 place-items-center rounded-md text-mute transition-colors hover:bg-negative-soft hover:text-negative" aria-label="Delete entry">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </button>
+        </li>`;
+    }).join('');
+  }
+
+  function renderProgress(period: Period, mode: string, kindLabel: string) {
+    $('prog-heading').textContent = kindLabel === 'Month' ? 'This month' : 'This week';
+    const days = dailyNets(period);
+    const useNet = mode === 'live';
+    // For reveal modes, show activity (entry counts) instead of net to avoid leaking the score.
+    const series = useNet
+      ? days.map((d) => ({ label: d.date.slice(8), val: d.net }))
+      : days.map((d) => ({ label: d.date.slice(8), val: period.entries.filter((e) => e.date === d.date).length }));
+
+    const max = Math.max(1, ...series.map((s) => Math.abs(s.val)));
+    const bars = series.map((s) => {
+      const h = Math.round((Math.abs(s.val) / max) * 100);
+      const color = useNet
+        ? (s.val > 0 ? 'bg-positive' : s.val < 0 ? 'bg-negative' : 'bg-surface-3')
+        : (s.val > 0 ? 'bg-ink' : 'bg-surface-3');
+      return `<div class="flex flex-1 flex-col items-center justify-end gap-1" title="${s.label}: ${s.val}">
+          <div class="w-full rounded-sm ${color}" style="height: ${Math.max(h, 3)}%"></div>
+        </div>`;
+    }).join('');
+
+    $('progress').innerHTML = `
+      <div class="flex h-28 items-end gap-1">${bars}</div>
+      <p class="mt-3 text-xs text-mute">${useNet ? 'Daily net momentum' : 'Entries logged per day'}</p>`;
+  }
+
+  function renderPrevious(mode: string, settings: any, entries: Entry[]) {
+    const periods = mode === 'monthly'
+      ? pastMonths(entries, 6)
+      : pastWeeks(entries, settings, 6);
+    const withData = periods.filter((p) => p.totals.count > 0);
+    if (withData.length === 0) {
+      $('previous').innerHTML = `<p class="text-sm text-mute">No completed periods yet. Your past ${mode === 'monthly' ? 'months' : 'weeks'} will appear here.</p>`;
+      return;
+    }
+    $('previous').innerHTML = `<ul class="divide-y divide-hairline">${withData.map((p) => {
+      const cat = categoryFor(p.totals.net);
+      const tone = p.totals.net > 0 ? 'text-positive' : p.totals.net < 0 ? 'text-negative' : 'text-ink';
+      return `<li class="flex items-center justify-between py-2.5">
+          <div>
+            <p class="text-sm text-ink">${esc(p.label)}</p>
+            <p class="text-xs text-mute">${cat.label}</p>
+          </div>
+          <span class="font-mono text-sm ${tone}">${signed(p.totals.net)}</span>
+        </li>`;
+    }).join('')}</ul>`;
+  }
+
+  function render() {
+    const settings = store.getSettings();
+    const mode = settings.trackingMode;
+    const entries = store.getEntries();
+    const isMonthly = mode === 'monthly';
+    const period = isMonthly ? currentMonth(entries) : currentWeek(entries, settings);
+    const kindLabel = isMonthly ? 'Month' : 'Week';
+    const today = store.getEntriesForDate(new Date().getFullYear() + '-' +
+      String(new Date().getMonth() + 1).padStart(2, '0') + '-' +
+      String(new Date().getDate()).padStart(2, '0'));
+
+    renderHeadline(period, mode, kindLabel);
+    renderStats(period, today.length, mode);
+    renderQuickAdd();
+    renderToday(today);
+    renderProgress(period, mode, kindLabel);
+    renderPrevious(mode, settings, entries);
+  }
+
+  // Delegated events
+  $('quick-add').addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('.qa-btn') as HTMLElement | null;
+    if (!btn) return;
+    store.logHabit(btn.dataset.id!);
+    btn.animate(
+      [{ transform: 'scale(1)' }, { transform: 'scale(0.94)' }, { transform: 'scale(1)' }],
+      { duration: 180, easing: 'ease-out' },
+    );
+  });
+
+  $('today-list').addEventListener('click', (e) => {
+    const li = (e.target as HTMLElement).closest('li[data-id]') as HTMLElement | null;
+    if (!li) return;
+    if ((e.target as HTMLElement).closest('.del-entry')) {
+      store.deleteEntry(li.dataset.id!);
+    }
+  });
+
+  store.onChange(render);
+  render();
+</script>
