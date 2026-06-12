@@ -24,6 +24,13 @@ import ModeSwitcher from '../components/ModeSwitcher.astro';
       <div id="current" class="relative"></div>
     </section>
 
+    <!-- Daily breakdown (live mode only — reveal modes keep the score hidden) -->
+    <section id="breakdown-section" class="mt-8 hidden">
+      <h2 class="text-sm font-medium text-ink">Daily breakdown</h2>
+      <p class="mt-1 text-xs text-body">See which days gained or lost momentum before opening the calendar.</p>
+      <div id="breakdown" class="card mt-4 p-2 sm:p-3"></div>
+    </section>
+
     <!-- Completed periods -->
     <section class="mt-10">
       <h2 class="text-sm font-medium text-ink">Completed periods</h2>
@@ -36,7 +43,7 @@ import ModeSwitcher from '../components/ModeSwitcher.astro';
 <script>
   import { store } from '../lib/store';
   import { categoryFor, signed } from '../lib/score';
-  import { currentWeek, currentMonth, pastWeeks, pastMonths } from '../lib/periods';
+  import { currentWeek, currentMonth, pastWeeks, pastMonths, dailyNets, parseISO } from '../lib/periods';
   import type { Period } from '../lib/periods';
 
   const $ = (id: string) => document.getElementById(id)!;
@@ -86,6 +93,24 @@ import ModeSwitcher from '../components/ModeSwitcher.astro';
       </div>`;
   }
 
+  const WEEKDAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const MONTHS_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  function breakdownRows(period: Period): string {
+    return dailyNets(period).map((d) => {
+      const date = parseISO(d.date);
+      const tone = d.net > 0 ? 'text-positive' : d.net < 0 ? 'text-negative' : 'text-mute';
+      const value = d.net === 0 ? '0' : signed(d.net);
+      return `<div class="flex items-center justify-between gap-3 px-3 py-2.5">
+          <span class="text-sm text-body">
+            <span class="text-ink">${WEEKDAYS[date.getDay()]}</span>
+            <span class="ml-2 font-mono text-xs text-mute">${MONTHS_SHORT[date.getMonth()]} ${date.getDate()}</span>
+          </span>
+          <span class="font-mono text-sm ${tone}">${value}</span>
+        </div>`;
+    }).join('');
+  }
+
   function historyCard(period: Period): string {
     const cat = categoryFor(period.totals.net);
     const tone = period.totals.net > 0 ? 'text-positive' : period.totals.net < 0 ? 'text-negative' : 'text-ink';
@@ -115,12 +140,16 @@ import ModeSwitcher from '../components/ModeSwitcher.astro';
 
     $('mode-note').textContent = NOTES[mode];
 
+    const breakdownSection = $('breakdown-section');
     if (mode === 'live') {
       $('cur-mesh').style.opacity = '0.12';
       $('current').innerHTML = scoreBlock(period, kindLabel);
+      $('breakdown').innerHTML = `<div class="divide-y divide-hairline">${breakdownRows(period)}</div>`;
+      breakdownSection.classList.remove('hidden');
     } else {
       $('cur-mesh').style.opacity = '0.05';
       $('current').innerHTML = lockedBlock(period, kindLabel);
+      breakdownSection.classList.add('hidden');
     }
 
     const history = (isMonthly ? pastMonths(entries, 6) : pastWeeks(entries, settings, 6))

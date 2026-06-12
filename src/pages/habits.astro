@@ -21,16 +21,16 @@ import PageHeader from '../components/PageHeader.astro';
       <p class="eyebrow mb-4">New custom habit</p>
       <div class="grid gap-3 sm:grid-cols-[1fr_auto_auto] sm:items-end">
         <div>
-          <label for="new-name" class="mb-1.5 block text-xs text-body">Habit name</label>
+          <label for="new-name" class="mb-1.5 block text-sm font-medium text-ink">Habit name</label>
           <input id="new-name" name="name" class="input" placeholder="e.g. Journaling" required maxlength="40" autocomplete="off" />
         </div>
         <div>
-          <label for="new-score" class="mb-1.5 block text-xs text-body">Score</label>
+          <label for="new-score" class="mb-1.5 block text-sm font-medium text-ink">Score</label>
           <input id="new-score" name="score" type="number" class="input sm:w-28" placeholder="+5" required value="5" min="-50" max="50" step="1" />
         </div>
         <button type="submit" class="btn btn-primary btn-sm h-10">Add habit</button>
       </div>
-      <p class="mt-2 text-xs text-mute">Use a negative number for a habit that subtracts momentum.</p>
+      <p class="mt-3 text-sm text-body">Use a negative number for a habit that subtracts momentum.</p>
     </form>
 
     <!-- Two columns: positive / negative -->
@@ -75,9 +75,10 @@ import PageHeader from '../components/PageHeader.astro';
           <span class="absolute top-0.5 h-5 w-5 rounded-full bg-canvas transition-all ${h.enabled ? 'left-[18px]' : 'left-0.5'}"></span>
         </button>
         <input
-          class="name-input input h-9 flex-1 bg-transparent shadow-none px-2"
+          class="name-input input h-9 min-w-0 flex-1 bg-transparent shadow-none px-2"
           value="${escapeHtml(h.name)}" maxlength="40" aria-label="Habit name"
         />
+        ${h.custom ? `<span class="badge-custom shrink-0" title="Habit you created">Custom</span>` : ''}
         <input
           class="score-input input h-9 w-20 text-center font-mono ${tone}"
           type="number" value="${h.score}" min="-50" max="50" step="1" aria-label="Score"
@@ -95,10 +96,13 @@ import PageHeader from '../components/PageHeader.astro';
     return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
   }
 
+  // Custom habits first, defaults after; sort is stable so order is otherwise preserved.
+  const customFirst = (a: Habit, b: Habit) => Number(b.custom) - Number(a.custom);
+
   function render() {
     const habits = store.getHabits();
-    const pos = habits.filter((h) => h.type === 'positive');
-    const neg = habits.filter((h) => h.type === 'negative');
+    const pos = habits.filter((h) => h.type === 'positive').sort(customFirst);
+    const neg = habits.filter((h) => h.type === 'negative').sort(customFirst);
     posList.innerHTML = pos.map(habitRow).join('') || emptyMsg();
     negList.innerHTML = neg.map(habitRow).join('') || emptyMsg();
     posCount.textContent = String(pos.length);

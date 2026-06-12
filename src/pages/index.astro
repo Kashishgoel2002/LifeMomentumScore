@@ -7,19 +7,64 @@ const features = [
   {
     eyebrow: '01 / Net momentum',
     title: 'Both sides of the ledger',
-    body: 'Positive habits add momentum. Negative habits subtract it. Your score is the honest net effect — not a streak you can game.',
+    body: 'Your wins and your slip-ups land on the same scorecard. The number you see is the truth, net of everything — and a streak can never fake it.',
   },
   {
     eyebrow: '02 / Delayed reveal',
     title: 'Reduce daily bias',
-    body: 'Hide your score and reveal it weekly or monthly. Distance from the daily number encourages more honest self-reflection.',
+    body: "Hide the score and unlock it weekly or monthly. When you can't chase a daily number, you finally log what actually happened.",
   },
   {
     eyebrow: '03 / A behavioral record',
     title: 'A calendar of your actions',
-    body: 'Every entry is timestamped and stored. Browse any day, edit history, and watch your trajectory take shape over time.',
+    body: 'Every action is timestamped and kept. Scroll back through any day and watch the real shape of your life come into focus.',
   },
 ];
+
+const faqs = [
+  {
+    q: 'What is a habit tracker?',
+    a: 'A habit tracker is a tool for recording the actions you repeat day to day — workouts, reading, sleep — so you can see your patterns over time. Most focus on streaks and completion rates.',
+  },
+  {
+    q: 'How is Life Momentum Score different from a habit tracker?',
+    a: 'Traditional trackers only count what you do well. Life Momentum Score weighs your positive and negative habits together and shows the net result, so you see your true direction — not just your wins.',
+  },
+  {
+    q: 'Can I track bad habits as well as good habits?',
+    a: 'Yes. Negative habits carry negative scores and subtract from your total. Logging them is the point — it reveals how much your good habits are actually moving the needle.',
+  },
+  {
+    q: 'What is delayed score reveal?',
+    a: 'In Weekly or Monthly mode your score stays hidden until the period ends. Removing the daily number reduces bias and helps you log honestly instead of optimizing for a figure.',
+  },
+  {
+    q: 'Does my data stay private?',
+    a: 'Completely. Everything is stored locally in your browser using localStorage. There are no accounts and no servers, so your data never leaves your device.',
+  },
+  {
+    q: 'Can I create custom habits?',
+    a: "Yes. Add your own habits with any score you choose, edit the default scores, disable the ones you don't use, and delete custom habits anytime.",
+  },
+  {
+    q: 'What is a momentum score?',
+    a: "Your momentum score is the sum of every habit you've logged in a period — positives minus negatives. It maps to six bands, from Negative Momentum to Thriving.",
+  },
+  {
+    q: 'Is Life Momentum Score free?',
+    a: 'Yes. Life Momentum Score is free and works instantly in your browser, with no sign-up and no backend.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 
 <Layout title="Life Momentum Score">
@@ -31,11 +76,7 @@ const features = [
     >
     </div>
     <div class="container-page relative py-24 text-center sm:py-32">
-      <p class="badge mx-auto w-fit animate-rise">
-        <span class="h-1.5 w-1.5 rounded-full bg-positive"></span>
-        No account needed · Data stays on your device
-      </p>
-      <h1 class="mx-auto mt-6 max-w-3xl text-4xl font-semibold tracking-tight sm:text-6xl animate-rise">
+      <h1 class="mx-auto max-w-3xl text-4xl font-semibold tracking-tight sm:text-6xl animate-rise">
         Measure the direction of your life.
       </h1>
       <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-body animate-rise">
@@ -59,13 +100,13 @@ const features = [
       <p class="mt-5 text-base leading-relaxed text-body">
         Traditional habit trackers reward streaks and completion percentages — but they ignore the
         habits quietly working against you. Life Momentum Score asks a different question:
-        <span class="text-ink">are your daily actions creating positive or negative momentum?</span>
+        <span class="text-ink">Where is your life actually heading?</span>
       </p>
     </div>
 
     <div class="mt-14 grid gap-4 md:grid-cols-3">
       {features.map((f) => (
-        <FeatureCard eyebrow={f.eyebrow} title={f.title} body={f.body} />
+        <FeatureCard eyebrow={f.eyebrow} title={f.title} body={f.body} hover />
       ))}
     </div>
   </section>
@@ -103,4 +144,35 @@ const features = [
       </div>
     </div>
   </section>
+
+  <!-- FAQ -->
+  <section class="border-t border-hairline">
+    <div class="container-page py-20 sm:py-28">
+      <div class="mx-auto max-w-2xl">
+        <p class="eyebrow">FAQ</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+          Questions, answered.
+        </h2>
+
+        <div class="faq mt-10 divide-y divide-hairline border-y border-hairline">
+          {faqs.map((f) => (
+            <details class="group">
+              <summary class="flex items-center justify-between gap-4 py-5 text-base font-medium text-ink">
+                {f.q}
+                <svg
+                  class="faq-icon shrink-0 text-mute"
+                  width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"
+                >
+                  <path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+              </summary>
+              <p class="faq-answer pb-5 -mt-1 text-sm leading-relaxed text-body">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} is:inline />
 </Layout>

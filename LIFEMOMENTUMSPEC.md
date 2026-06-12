@@ -386,3 +386,476 @@ Before implementing code, generate:
 5. Implementation plan
 
 Wait for approval before writing any code.
+
+
+Improvement 1 prompt:
+
+# Life Momentum Score — Version 1.1 Improvement Pass
+
+Read this entire prompt before making any changes.
+
+---
+
+# CRITICAL RULES
+
+This is NOT a redesign.
+
+The current website structure, dark theme, layout, scoring system, and overall aesthetic are already approved.
+
+Preserve all existing functionality.
+
+Do NOT:
+
+* Rewrite the application
+* Change scoring logic
+* Change momentum calculations
+* Change dashboard calculations
+* Change review calculations
+* Change calendar functionality
+* Change habit tracking functionality
+* Change local storage architecture
+* Change page URLs
+* Change SEO setup
+* Change dark-mode design language
+* Change Vercel-inspired visual style
+* Change responsive layout unless required for a listed fix
+* Add new pages unless explicitly requested
+* Add unnecessary animations
+* Add unnecessary complexity
+
+Only implement the changes listed below.
+
+Before writing any code:
+
+1. Show implementation plan.
+2. List files that will be modified.
+3. Wait for approval.
+
+---
+
+# ISSUE 1: Navigation Clarity
+
+Current problem:
+
+The website opens on the landing page.
+
+However the navigation begins with Dashboard, causing confusion because users naturally assume Dashboard is the first page.
+
+Required solution:
+
+Add a dedicated Home navigation item.
+
+Navigation order:
+
+Home
+Dashboard
+Habits
+Calendar
+Review
+Features
+About
+
+Requirements:
+
+* Home must always return to landing page.
+* Existing logo must remain.
+* Logo must also continue linking to Home.
+* Do not remove landing page.
+
+---
+
+# ISSUE 2: Improve Visibility Of Section Labels
+
+Affected labels include:
+
+* THE PROBLEM
+* THE SCALE
+* ABOUT
+* DASHBOARD
+* REVIEW
+* PRODUCT
+* LEARN
+* NEW CUSTOM HABIT
+* Similar labels throughout the site
+
+Current issue:
+
+Labels are too dim and easy to miss.
+
+Required solution:
+
+Create one consistent label style:
+
+* Slightly larger
+* Slightly brighter
+* Improved contrast
+* Better visual hierarchy
+
+Maintain premium dark aesthetic.
+
+Do not make labels oversized.
+
+---
+
+# ISSUE 3: Improve The Problem Section
+
+Current issue:
+
+The ending statement lacks emotional impact.
+
+Replace:
+
+"Are your daily actions creating positive or negative momentum?"
+
+With:
+
+"Where is your life actually heading?"
+
+Keep surrounding content.
+
+Ensure capitalization and typography are correct.
+
+---
+
+# ISSUE 4: Improve Feature Cards
+
+Cards:
+
+* Net Momentum
+* Delayed Reveal
+* A Behavioral Record
+
+Current issues:
+
+* Headings are too subtle.
+* Descriptions are forgettable.
+* Cards appear interactive but feel static.
+
+Required solution:
+
+* Improve heading visibility.
+* Rewrite descriptions to be more memorable.
+* Add a subtle hover effect only.
+
+Do NOT:
+
+* Add modals
+* Add click actions
+* Add expandable content
+* Add dropdowns
+* Add heavy animations
+
+Keep them lightweight.
+
+---
+
+# ISSUE 5: Footer Hierarchy
+
+Current issue:
+
+PRODUCT and LEARN appear to be clickable links.
+
+Required solution:
+
+Clearly differentiate:
+
+* Footer section headings
+* Footer navigation links
+
+Keep current layout.
+
+---
+
+# ISSUE 6: Custom Habits Improvements
+
+Required changes:
+
+1. Display custom habits above default habits.
+2. Add visible CUSTOM badge beside custom habits.
+3. Ensure badge styling matches dark theme.
+
+Goal:
+
+Users should instantly identify habits they created.
+
+---
+
+# ISSUE 7: Improve Custom Habit Form Visibility
+
+Section:
+
+NEW CUSTOM HABIT
+
+Improve visibility of:
+
+* Labels
+* Placeholder text
+* Instruction text
+
+Especially:
+
+"Use a negative number for a habit that subtracts momentum."
+
+This instruction should be clearly readable.
+
+---
+
+# ISSUE 8: Rewrite About Page
+
+Current issue:
+
+The About page feels like documentation.
+
+Rewrite the entire About page.
+
+Requirements:
+
+* More engaging
+* More memorable
+* More emotional
+* Easier to read
+* Less text-heavy
+* More human
+
+Writing style:
+
+Conversational.
+
+Goal:
+
+Users should think:
+
+"I've never looked at my habits this way before."
+
+Keep underlying philosophy unchanged.
+
+---
+
+# ISSUE 9: Remove Hero Badge
+
+Remove:
+
+"No account needed · Data stays on your device"
+
+Reason:
+
+This is implementation detail and weakens the first impression.
+
+Privacy is already mentioned elsewhere.
+
+Do not replace it.
+
+Simply remove it.
+
+---
+
+# ISSUE 10: Logo And Favicon Update
+
+Keep the existing Life Momentum icon.
+
+Do NOT change:
+
+* Gradient colors
+* Shape
+* Background
+* Brand identity
+* Overall appearance
+
+Only change:
+
+The internal white line.
+
+Current issue:
+
+It resembles a stock market graph.
+
+Replace it with:
+
+A clean upward momentum arrow.
+
+Requirements:
+
+* Minimal
+* Modern
+* Visible at small sizes
+* Represents growth and progress
+
+After updating:
+
+Generate:
+
+* favicon.ico
+* favicon-16x16.png
+* favicon-32x32.png
+
+Update favicon references.
+
+---
+
+# ISSUE 11: Add FAQ Section
+
+Add FAQ near bottom of homepage.
+
+Placement:
+
+Features
+↓
+FAQ
+↓
+Footer
+
+Do NOT create a separate FAQ page.
+
+Use accordion layout.
+
+Requirements:
+
+* Questions visible initially.
+* Answers expand on click.
+* Answers collapse on click.
+* Lightweight interaction.
+* Mobile friendly.
+* Dark theme consistent.
+* Subtle animation only.
+
+Questions:
+
+1. What is a habit tracker?
+2. How is Life Momentum Score different from a habit tracker?
+3. Can I track bad habits as well as good habits?
+4. What is delayed score reveal?
+5. Does my data stay private?
+6. Can I create custom habits?
+7. What is a momentum score?
+8. Is Life Momentum Score free?
+
+Write concise SEO-friendly answers.
+
+Avoid keyword stuffing.
+
+Goal:
+
+Improve SEO without making homepage feel long or cluttered.
+
+---
+
+# ISSUE 12: Mobile-First Review
+
+This product is primarily used on mobile devices.
+
+Review every page:
+
+* Home
+* Dashboard
+* Habits
+* Calendar
+* Review
+* Features
+* About
+
+Focus on:
+
+* Readability
+* Touch targets
+* Forms
+* Habit logging workflow
+* Navigation usability
+* Scrolling experience
+
+Make only lightweight improvements.
+
+Do not redesign the application.
+
+---
+
+# ISSUE 13: General Readability Pass
+
+Throughout entire website:
+
+Improve:
+
+* Low-contrast labels
+* Low-contrast helper text
+* Low-contrast secondary text
+
+Several sections currently feel too dim.
+
+Maintain dark theme.
+
+Do not make text excessively bright.
+
+---
+
+# ISSUE 14: Daily Breakdown In Review Page
+
+Current problem:
+
+Users can see a weekly or monthly score but cannot quickly identify which specific days contributed most to the result.
+
+Example:
+
+Week Score = -11
+
+The user immediately wants to know:
+
+* Which days were positive?
+* Which days were negative?
+* Which day helped most?
+* Which day hurt most?
+
+Currently users must manually inspect calendar entries.
+
+Required solution:
+
+Add a Daily Breakdown section directly below the main score card.
+
+Example:
+
+Monday +8
+Tuesday +5
+Wednesday -12
+Thursday -7
+Friday +3
+Saturday 0
+Sunday -8
+
+Requirements:
+
+* Show every day in selected period.
+* Show net score for each day.
+* Positive values use existing positive styling.
+* Negative values use existing negative styling.
+* Zero values use neutral styling.
+* Match existing design language.
+* Mobile friendly.
+* Lightweight.
+
+Do NOT:
+
+* Add charts.
+* Add graphs.
+* Add analytics dashboards.
+
+Purpose:
+
+Users should immediately understand where momentum was gained or lost before drilling into Calendar.
+
+---
+
+# ISSUE 15: Validation
+
+After all changes:
+
+1. Run Astro build.
+2. Run Astro type checks.
+3. Fix all warnings.
+4. Fix all errors.
+5. Verify mobile layouts.
+6. Verify FAQ accordion.
+7. Verify favicon update.
+8. Verify custom habit ordering.
+9. Verify daily breakdown calculations.
+10. Provide summary of completed changes.
+11. List every modified file.
+
+Wait for approval before making any additional improvements not listed in this prompt.

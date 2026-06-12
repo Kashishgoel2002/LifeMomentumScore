@@ -20,9 +20,11 @@
 
   /* Text */
   --color-ink: #ededed;
-  --color-body: #a1a1a1;
-  --color-mute: #6e6e6e;
+  --color-body: #b0b0b0;
+  --color-mute: #8a8a8a;
   --color-on-primary: #0a0a0a;
+  /* Section/technical label tone — brighter than body for clear hierarchy */
+  --color-label: #c8c8c8;
 
   /* Momentum semantics — restrained, not neon */
   --color-positive: #3ecf8e;
@@ -146,13 +148,16 @@
 
 /* ---- Small, stable component classes ---- */
 @layer components {
-  /* Eyebrow / technical label — mono is the voice of the platform */
+  /* Eyebrow / technical label — mono is the voice of the platform.
+     Brighter + slightly larger with deliberate tracking so section
+     labels read clearly without shouting. */
   .eyebrow {
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: 12.5px;
     line-height: 16px;
-    letter-spacing: 0.02em;
-    color: var(--color-mute);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--color-label);
     text-transform: uppercase;
   }
 
@@ -236,6 +241,48 @@
     color: var(--color-body);
     box-shadow: inset 0 0 0 1px var(--color-hairline);
   }
+
+  /* Compact pill used to flag user-created (custom) habits. */
+  .badge-custom {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.4rem;
+    border-radius: 9999px;
+    background: var(--color-surface-3);
+    color: var(--color-label);
+    box-shadow: inset 0 0 0 1px var(--color-hairline-strong);
+  }
+
+  /* Marketing card hover — subtle lift + brighter ring, nothing heavy. */
+  .card-hover {
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      inset 0 0 0 1px var(--color-hairline-strong),
+      0 6px 16px -8px rgba(0, 0, 0, 0.55);
+  }
+
+  /* FAQ accordion — native <details>, dark theme, subtle reveal. */
+  .faq summary {
+    cursor: pointer;
+    list-style: none;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq .faq-icon { transition: transform 0.2s ease; }
+  .faq details[open] .faq-icon { transform: rotate(45deg); }
+  .faq details[open] .faq-answer { animation: faqReveal 0.22s ease both; }
+}
+
+@keyframes faqReveal {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ---- Motion ---- */
