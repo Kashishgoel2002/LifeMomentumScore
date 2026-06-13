@@ -127,6 +127,13 @@ import ModeSwitcher from '../components/ModeSwitcher.astro';
           <span><span class="font-mono text-negative">${period.totals.negative === 0 ? '0' : signed(period.totals.negative)}</span> neg</span>
           <span><span class="font-mono text-body">${period.totals.count}</span> entries</span>
         </div>
+        <details class="history-breakdown mt-4 border-t border-hairline pt-3">
+          <summary class="flex cursor-pointer items-center justify-between gap-2 text-xs text-body transition-colors hover:text-ink">
+            <span>View Daily Breakdown</span>
+            <svg class="hb-icon shrink-0 text-mute" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="hb-body mt-2 divide-y divide-hairline">${breakdownRows(period)}</div>
+        </details>
       </div>`;
   }
 

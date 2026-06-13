@@ -278,6 +278,14 @@
   .faq .faq-icon { transition: transform 0.2s ease; }
   .faq details[open] .faq-icon { transform: rotate(45deg); }
   .faq details[open] .faq-answer { animation: faqReveal 0.22s ease both; }
+
+  /* Review — expandable historical daily breakdown. Native <details>,
+     same restrained reveal as the FAQ accordion. */
+  .history-breakdown summary { list-style: none; }
+  .history-breakdown summary::-webkit-details-marker { display: none; }
+  .history-breakdown .hb-icon { transition: transform 0.2s ease; }
+  .history-breakdown[open] .hb-icon { transform: rotate(180deg); }
+  .history-breakdown[open] .hb-body { animation: faqReveal 0.22s ease both; }
 }
 
 @keyframes faqReveal {

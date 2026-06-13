@@ -17,44 +17,123 @@ import Layout from '../layouts/Layout.astro';
         nights. So why does it feel like you didn't move an inch?
       </p>
 
-      <div class="mt-12 space-y-10">
+      <div class="mt-14 space-y-16">
+        <!-- 1 · The comparison: streaks vs. a real ledger -->
         <section>
           <h2 class="text-xl font-semibold tracking-tight text-ink">Streaks tell flattering lies</h2>
           <p class="mt-3 text-base leading-relaxed text-body">
-            Most habit apps only count the good stuff. They hand you a row of green checkmarks and
-            quietly look away from everything pulling in the other direction. It feels great. It also
-            isn't true.
+            Most habit apps only count the good stuff — then quietly look away from everything
+            pulling the other way. Same week, two very different stories:
           </p>
-          <p class="mt-4 text-base leading-relaxed text-body">
-            Life Momentum Score keeps one honest ledger instead. Good habits add. Bad habits subtract.
-            The number you see is what's actually left over. Log five workouts and still land in the
-            red — and finally understand why the week felt off.
+
+          <div class="mt-6 grid gap-4 sm:grid-cols-2">
+            <!-- Habit tracker view -->
+            <div class="card p-5">
+              <p class="eyebrow">Most habit trackers</p>
+              <ul class="mt-4 space-y-2 font-mono text-sm">
+                <li class="flex items-center gap-2.5 text-body"><span class="text-positive">✓</span> Workout</li>
+                <li class="flex items-center gap-2.5 text-body"><span class="text-positive">✓</span> Reading</li>
+                <li class="flex items-center gap-2.5 text-body"><span class="text-positive">✓</span> Meditation</li>
+              </ul>
+              <div class="mt-5 border-t border-hairline pt-4">
+                <p class="text-xs text-mute">Result</p>
+                <p class="mt-1 text-base font-medium text-positive">“Great week.”</p>
+              </div>
+            </div>
+
+            <!-- Life Momentum view -->
+            <div class="card p-5">
+              <p class="eyebrow">Life Momentum</p>
+              <ul class="mt-4 space-y-2 font-mono text-sm">
+                <li class="flex items-center gap-2.5 text-body"><span class="text-positive">✓</span> Workout</li>
+                <li class="flex items-center gap-2.5 text-body"><span class="text-positive">✓</span> Reading</li>
+                <li class="flex items-center gap-2.5 text-body"><span class="text-positive">✓</span> Meditation</li>
+                <li class="flex items-center gap-2.5 text-body"><span class="text-negative">✗</span> Doomscrolling</li>
+                <li class="flex items-center gap-2.5 text-body"><span class="text-negative">✗</span> Gambling</li>
+                <li class="flex items-center gap-2.5 text-body"><span class="text-negative">✗</span> Poor sleep</li>
+              </ul>
+              <div class="mt-5 border-t border-hairline pt-4">
+                <p class="text-xs text-mute">Result</p>
+                <p class="mt-1 text-base font-medium text-ink">“Mixed week.”</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="mt-6 text-base leading-relaxed text-body">
+            Life Momentum keeps one honest ledger.
+            <span class="text-positive">Good habits add.</span>
+            <span class="text-negative">Bad habits subtract.</span>
+            The number you see is what's actually left over — so you can log five workouts, still
+            land in the red, and finally understand why the week felt off.
           </p>
         </section>
 
+        <!-- 2 · The reveal: stop grading by the hour -->
         <section>
           <h2 class="text-xl font-semibold tracking-tight text-ink">Stop grading yourself by the hour</h2>
           <p class="mt-3 text-base leading-relaxed text-body">
             Check a score every day and you start gaming it — chasing the number instead of living
-            your life. So you can hide it. Weekly and Monthly modes lock the score away until the
-            period ends, so you log what really happened and meet the result with fresh, honest eyes.
+            your life. So you can hide it.
           </p>
-          <blockquote class="mt-5 border-l-2 border-hairline-strong pl-4 text-base italic text-body">
+
+          <div class="mt-6 grid gap-px overflow-hidden rounded-lg bg-hairline sm:grid-cols-2">
+            <div class="bg-surface p-5">
+              <p class="text-sm font-medium text-ink">Score visible daily</p>
+              <p class="mt-2 text-sm leading-relaxed text-mute">
+                You optimize for the number. One bad morning feels like failure. You quit by Thursday.
+              </p>
+            </div>
+            <div class="bg-surface p-5">
+              <p class="text-sm font-medium text-ink">Score hidden until the period ends</p>
+              <p class="mt-2 text-sm leading-relaxed text-body">
+                You log what really happened. No daily bias. You meet the result with fresh, honest eyes.
+              </p>
+            </div>
+          </div>
+
+          <p class="mt-6 text-base leading-relaxed text-body">
+            Weekly and Monthly modes lock the score away until the period ends.
+          </p>
+
+          <blockquote class="mt-6 border-l-2 border-hairline-strong pl-5 text-lg leading-relaxed italic text-ink">
             “Delayed score reveals help reduce daily bias and encourage more honest self-reflection.”
           </blockquote>
         </section>
 
+        <!-- 3 · Privacy as a feature -->
         <section>
           <h2 class="text-xl font-semibold tracking-tight text-ink">Yours, and only yours</h2>
           <p class="mt-3 text-base leading-relaxed text-body">
-            This kind of honesty only works in private. So there's no account, no login, no server —
-            nothing to sign up for. Everything lives in your browser and never leaves your device.
-            Close the tab, come back tomorrow, it's all still here. Just you and the truth.
+            This kind of honesty only works in private. So nothing about you ever leaves your device.
+          </p>
+
+          <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <div class="card p-4 text-center">
+              <p class="text-2xl font-semibold tracking-tight text-ink">No</p>
+              <p class="mt-1 text-xs text-mute">account</p>
+            </div>
+            <div class="card p-4 text-center">
+              <p class="text-2xl font-semibold tracking-tight text-ink">No</p>
+              <p class="mt-1 text-xs text-mute">login</p>
+            </div>
+            <div class="card p-4 text-center">
+              <p class="text-2xl font-semibold tracking-tight text-ink">No</p>
+              <p class="mt-1 text-xs text-mute">server</p>
+            </div>
+            <div class="card p-4 text-center">
+              <p class="text-2xl font-semibold tracking-tight text-positive">100%</p>
+              <p class="mt-1 text-xs text-mute">on your device</p>
+            </div>
+          </div>
+
+          <p class="mt-6 text-base leading-relaxed text-body">
+            Everything lives in your browser. Close the tab, come back tomorrow, it's all still here.
+            Just you and the truth.
           </p>
         </section>
       </div>
 
-      <div class="mt-12 flex flex-col gap-3 sm:flex-row">
+      <div class="mt-14 flex flex-col gap-3 sm:flex-row">
         <a href="/dashboard" class="btn btn-primary inline-flex">Start Tracking</a>
         <a href="/features" class="btn btn-secondary inline-flex">Explore features</a>
       </div>

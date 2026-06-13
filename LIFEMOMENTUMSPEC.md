@@ -859,3 +859,272 @@ After all changes:
 11. List every modified file.
 
 Wait for approval before making any additional improvements not listed in this prompt.
+
+
+
+Improvement Version 1.2
+
+# Life Momentum Score — Version 1.2 Improvements
+
+Read this entire prompt before making any changes.
+
+---
+
+# CRITICAL RULES
+
+This is NOT a redesign.
+
+The current Version 1.1 layout, navigation, scoring logic, review logic, calendar system, habits system, FAQ system, favicon concept, dark theme, and overall design language are approved.
+
+Do NOT:
+
+* Change scoring calculations
+* Change momentum logic
+* Change delayed reveal logic
+* Change calendar functionality
+* Change habit tracking functionality
+* Change localStorage architecture
+* Change page URLs
+* Change SEO setup
+* Change FAQ content
+* Change responsive structure
+* Change the dark Vercel-inspired design language
+* Add heavy animations
+* Add unnecessary dependencies
+
+Only implement the issues listed below.
+
+Before writing any code:
+
+1. Show implementation plan.
+2. List files that will be modified.
+3. Wait for approval.
+
+---
+
+# ISSUE 1: Make Favicon And Brand Logo Identical
+
+Current problem:
+
+The favicon and the Life Momentum logo are visually similar but not identical.
+
+Even though both use the same gradient background and upward arrow concept, they appear to be generated from different source assets.
+
+This creates an inconsistency in branding.
+
+Required solution:
+
+Create a single master icon.
+
+Use that exact icon source for:
+
+* Navbar logo
+* Footer logo
+* favicon.ico
+* favicon-16x16.png
+* favicon-32x32.png
+
+Requirements:
+
+* Keep existing gradient background.
+* Keep existing shape.
+* Keep existing upward arrow concept.
+* Do not redesign the brand.
+* Do not introduce new colors.
+
+Goal:
+
+The browser favicon and the logo displayed in the website should look like the same icon at different sizes.
+
+---
+
+# ISSUE 2: Historical Daily Breakdown For Completed Review Periods
+
+Current problem:
+
+The current review period correctly shows Daily Breakdown.
+
+Completed periods only show:
+
+Week → Score
+
+without showing which specific days created that result.
+
+Users may want to understand:
+
+* Why a previous week was positive.
+* Why a previous week was negative.
+* Which specific days affected the score.
+
+Required solution:
+
+Add a lightweight expandable breakdown to completed period cards.
+
+Example:
+
+Jun 1 – Jun 7      +18
+
+[View Daily Breakdown]
+
+Monday       +8
+Tuesday      -2
+Wednesday    +5
+Thursday     +1
+Friday       +4
+Saturday      0
+Sunday       +2
+
+Requirements:
+
+* Collapsed by default.
+* Expand on click.
+* Collapse on second click.
+* Mobile friendly.
+* Match existing design language.
+* Lightweight implementation.
+
+Do NOT:
+
+* Add charts.
+* Add graphs.
+* Add analytics dashboards.
+
+Purpose:
+
+Allow users to understand historical periods without cluttering the page.
+
+---
+
+# ISSUE 3: Information Design And Storytelling Pass
+
+Current problem:
+
+The About page is improved compared to Version 1.0, but it still feels like documentation.
+
+The issue is not the dark theme.
+
+The issue is not the color palette.
+
+The issue is not typography.
+
+The issue is that information is still presented mostly as:
+
+Heading
+→ Paragraph
+→ Paragraph
+→ Heading
+→ Paragraph
+
+This creates a reading experience rather than a memorable experience.
+
+The content communicates information but does not create enough emotional impact.
+
+Required solution:
+
+Apply an information-design and storytelling pass to the About page.
+
+Important:
+
+Do NOT simply rewrite paragraphs.
+
+Instead, redesign how information is presented.
+
+Use techniques such as:
+
+* Visual comparisons
+* Contrasts
+* Examples
+* Short impactful statements
+* Quote blocks
+* Callout sections
+* Mini scenarios
+* Structured examples
+* Strategic use of positive and negative momentum colors
+* Better visual hierarchy
+* Better spacing and pacing
+
+Example direction:
+
+Instead of explaining the concept entirely through paragraphs:
+
+Most habit trackers:
+
+✓ Workout
+✓ Reading
+✓ Meditation
+
+Result:
+"Great week."
+
+Life Momentum:
+
+✓ Workout
+✓ Reading
+✓ Meditation
+✗ Doomscrolling
+✗ Gambling
+✗ Poor sleep
+
+Result:
+"Mixed week."
+
+This type of information design is preferred over large blocks of text.
+
+Goal:
+
+Users should think:
+
+"I understand this immediately."
+
+and
+
+"I have never looked at my habits this way before."
+
+Inspiration:
+
+The presentation quality should feel closer to modern SaaS companies such as:
+
+* Linear
+* Stripe
+* Vercel
+* Notion
+
+without copying their designs.
+
+Requirements:
+
+* Keep content concise.
+* Improve emotional impact.
+* Improve scannability.
+* Improve mobile readability.
+* Reduce dependence on large paragraphs.
+* Increase use of visual storytelling.
+
+Do NOT:
+
+* Add illustrations.
+* Add large graphics.
+* Add videos.
+* Add heavy animations.
+* Add excessive colors.
+
+Focus on information design rather than decoration.
+
+---
+
+# VALIDATION
+
+After implementation:
+
+1. Run Astro build.
+2. Run Astro check.
+3. Fix all errors.
+4. Fix all warnings.
+5. Verify mobile layouts.
+6. Verify favicon consistency.
+7. Verify historical breakdown functionality.
+8. Verify About page readability and storytelling improvements.
+9. Provide a summary of all completed changes.
+10. List all modified files.
+
+Wait for approval before making any changes.
