@@ -1128,3 +1128,360 @@ After implementation:
 10. List all modified files.
 
 Wait for approval before making any changes.
+
+
+
+Changes version 1.3
+
+
+# Life Momentum Score — Version 1.3 (Launch Readiness, SEO & Trust)
+
+Read this entire prompt before making any changes.
+
+## Important Rules
+
+1. Do NOT redesign the website.
+2. Do NOT change scoring logic.
+3. Do NOT change momentum calculations.
+4. Do NOT change habit storage/localStorage.
+5. Do NOT change dashboard, calendar, review, or habits workflows.
+6. Do NOT add login, signup, backend, database, cloud sync, or accounts.
+7. Preserve the current dark design system and visual identity.
+8. Make only the changes listed below.
+9. Run astro build and astro check after implementation.
+10. Do NOT commit or push changes.
+11. Provide a complete summary of all modified files after implementation.
+12. Wait for approval before any commit.
+
+---
+
+# Goal
+
+Prepare the website for:
+
+* Public launch
+* Search engine indexing
+* AdSense readiness
+* User trust
+* Social sharing
+* Technical SEO best practices
+
+This is not a feature release.
+
+This is a launch-readiness release.
+
+---
+
+# Issue 1 — Privacy Policy Page
+
+Create:
+
+/privacy
+
+Requirements:
+
+* Match the current design language.
+* Explain that all habit data is stored locally on the user's device.
+* No account required.
+* No login required.
+* No personal information collected.
+* No analytics currently used.
+* No advertising currently used.
+* Explain that the policy may be updated in the future.
+
+Write in plain English, not legal jargon.
+
+---
+
+# Issue 2 — Terms & Conditions Page
+
+Create:
+
+/terms
+
+Requirements:
+
+* Productivity and self-improvement tool.
+* No guarantees regarding results.
+* Users are responsible for their own decisions and actions.
+* Service may evolve over time.
+* No warranties.
+* Clean, professional structure.
+
+Keep it simple and readable.
+
+---
+
+# Issue 3 — Contact Us Page
+
+Create:
+
+/contact
+
+Use this email:
+
+[lifemomentumscore@gmail.com](mailto:lifemomentumscore@gmail.com)
+
+Include:
+
+* Feedback requests
+* Bug reports
+* Feature suggestions
+* General inquiries
+
+Do NOT create a contact form.
+
+Email only.
+
+Keep the page friendly and welcoming.
+
+---
+
+# Issue 4 — About Page Refinement
+
+The About page has already improved significantly.
+
+Do NOT rewrite it from scratch.
+
+Instead:
+
+* Improve spacing where helpful.
+* Improve hierarchy where helpful.
+* Improve mobile readability.
+* Make comparison examples easier to scan.
+* Keep the comparison cards.
+* Keep the delayed reveal section.
+* Keep the privacy section.
+
+No major content rewrite.
+
+Focus on polish, readability, and presentation.
+
+---
+
+# Issue 5 — On-Page SEO Optimization
+
+Perform a complete SEO pass.
+
+Primary keyword:
+
+Life Momentum Score
+
+Supporting keywords:
+
+* habit tracker
+* habit tracking app
+* daily habit tracker
+* daily habits tracker
+* productivity tracker
+* self improvement tracker
+* personal growth tracker
+* momentum tracker
+* habit score
+* behavior tracker
+* daily accountability tracker
+* positive and negative habits
+* goal tracking app
+* self discipline tracker
+
+Requirements:
+
+* Improve title tags.
+* Improve meta descriptions.
+* Improve canonical tags.
+* Improve heading hierarchy.
+* Improve metadata quality.
+* Improve keyword coverage naturally.
+
+Avoid keyword stuffing.
+
+Write for humans first.
+
+---
+
+# Issue 6 — Homepage Philosophy Section
+
+Add a small section near the bottom of the homepage.
+
+Length:
+
+150–250 words.
+
+This section is NOT a FAQ.
+
+Do NOT repeat the existing FAQ content.
+
+Do NOT use question-answer format.
+
+Purpose:
+
+Explain the philosophy behind the product.
+
+Example themes:
+
+* Most habit trackers measure completion.
+* Life Momentum Score measures direction.
+* Positive habits help.
+* Negative habits matter too.
+* Momentum comes from net behavior.
+
+Think of it as a short article.
+
+It should feel insightful and useful, not like SEO spam.
+
+---
+
+# Issue 7 — Open Graph & Social Sharing
+
+Add complete social sharing support.
+
+Requirements:
+
+* OG title
+* OG description
+* OG image
+* Twitter card support
+
+Create a branded OG image using the existing visual identity.
+
+Verify that when someone shares the website URL on:
+
+* WhatsApp
+* Facebook
+* LinkedIn
+* X/Twitter
+* Telegram
+* Discord
+
+a professional preview appears automatically.
+
+No share buttons are required.
+
+No user interaction is required.
+
+---
+
+# Issue 8 — Structured Data
+
+Add:
+
+1. SoftwareApplication Schema
+
+Tell search engines that this website is a productivity software application.
+
+2. WebSite Schema
+
+Tell search engines that this is the official website.
+
+Keep:
+
+* Existing FAQ schema
+
+Validate all schema.
+
+---
+
+# Issue 9 — Sitemap & Robots Verification
+
+Check whether:
+
+* sitemap.xml
+* robots.txt
+
+already exist.
+
+If they already exist:
+
+* Verify correctness.
+* Improve if necessary.
+
+If they are missing:
+
+* Create them.
+
+Requirements:
+
+* Robots references sitemap.
+* Sitemap includes all public SEO pages.
+* Everything works after build.
+
+---
+
+# Issue 10 — Custom Error Pages
+
+Create:
+
+* 404 page
+* 500 page
+
+Requirements:
+
+* Match current branding.
+* Friendly messaging.
+* Button to Home.
+* Button to Dashboard.
+* Mobile friendly.
+
+Example:
+
+404
+
+Page Not Found
+
+The page you're looking for doesn't exist.
+
+[Go Home]
+[Open Dashboard]
+
+Keep it clean and lightweight.
+
+---
+
+# Issue 11 — Footer Trust Links
+
+Add footer links:
+
+* About Us
+* Privacy Policy
+* Terms & Conditions
+* Contact Us
+
+Do NOT add these to the main navigation.
+
+Keep them in the footer.
+
+Maintain current footer design.
+
+---
+
+# Issue 12 — Copyright
+
+Add:
+
+© 2026 Life Momentum Score. All rights reserved.
+
+to the footer.
+
+Keep styling subtle and professional.
+
+---
+
+# Validation Requirements
+
+After implementation:
+
+1. Run astro check.
+2. Run astro build.
+3. Verify all routes.
+4. Verify sitemap.
+5. Verify robots.txt.
+6. Verify structured data.
+7. Verify OG tags.
+8. Verify mobile layout.
+9. Provide a complete modified-file list.
+10. Provide a complete implementation summary.
+11. Wait for approval before committing anything.
+
+Do not commit.
+Do not push.
+Wait for approval after implementation.

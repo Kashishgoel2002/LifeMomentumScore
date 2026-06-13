@@ -6,7 +6,12 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://lifemomentumscore.com',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // Keep error pages out of the sitemap; everything else is public + indexable.
+      filter: (page) => !/\/(404|500)\/?$/.test(page),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

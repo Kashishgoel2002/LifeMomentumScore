@@ -17,11 +17,20 @@ const cols = [
       { href: '/about', label: 'About' },
     ],
   },
+  {
+    title: 'Company',
+    links: [
+      { href: '/about', label: 'About Us' },
+      { href: '/privacy', label: 'Privacy Policy' },
+      { href: '/terms', label: 'Terms & Conditions' },
+      { href: '/contact', label: 'Contact Us' },
+    ],
+  },
 ];
 ---
 
 <footer class="border-t border-hairline">
-  <div class="container-page grid gap-10 py-16 sm:grid-cols-2 md:grid-cols-4">
+  <div class="container-page grid gap-10 py-16 sm:grid-cols-2 md:grid-cols-5">
     <div class="md:col-span-2">
       <div class="flex items-center gap-2.5">
         <img src="/favicon.svg" width="28" height="28" class="h-7 w-7 rounded-md" alt="" aria-hidden="true" />
@@ -48,7 +57,7 @@ const cols = [
 
   <div class="border-t border-hairline">
     <div class="container-page flex flex-col gap-2 py-6 text-xs text-mute sm:flex-row sm:items-center sm:justify-between">
-      <p>© {year} Life Momentum Score</p>
+      <p>© {year} Life Momentum Score. All rights reserved.</p>
       <p class="font-mono">Data stays on your device · localStorage</p>
     </div>
   </div>

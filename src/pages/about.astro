@@ -4,7 +4,7 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout
   title="About"
-  description="Why Life Momentum Score measures net momentum instead of streaks — and the philosophy behind delayed score reveals."
+  description="Why Life Momentum Score measures net momentum instead of streaks — the philosophy behind tracking positive and negative habits and using delayed score reveals for honest self-improvement."
 >
   <article class="container-page py-20 sm:py-24">
     <div class="mx-auto max-w-2xl">
@@ -12,12 +12,12 @@ import Layout from '../layouts/Layout.astro';
       <h1 class="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">
         You're better at hiding from yourself than you think.
       </h1>
-      <p class="mt-5 text-lg leading-relaxed text-body">
+      <p class="mt-6 text-lg leading-relaxed text-body">
         You finished the week feeling productive. Three workouts, a couple of good books, early
         nights. So why does it feel like you didn't move an inch?
       </p>
 
-      <div class="mt-14 space-y-16">
+      <div class="mt-16 space-y-16 sm:space-y-20">
         <!-- 1 · The comparison: streaks vs. a real ledger -->
         <section>
           <h2 class="text-xl font-semibold tracking-tight text-ink">Streaks tell flattering lies</h2>
@@ -30,7 +30,7 @@ import Layout from '../layouts/Layout.astro';
             <!-- Habit tracker view -->
             <div class="card p-5">
               <p class="eyebrow">Most habit trackers</p>
-              <ul class="mt-4 space-y-2 font-mono text-sm">
+              <ul class="mt-4 space-y-2.5 font-mono text-sm">
                 <li class="flex items-center gap-2.5 text-body"><span class="text-positive">✓</span> Workout</li>
                 <li class="flex items-center gap-2.5 text-body"><span class="text-positive">✓</span> Reading</li>
                 <li class="flex items-center gap-2.5 text-body"><span class="text-positive">✓</span> Meditation</li>
@@ -44,10 +44,12 @@ import Layout from '../layouts/Layout.astro';
             <!-- Life Momentum view -->
             <div class="card p-5">
               <p class="eyebrow">Life Momentum</p>
-              <ul class="mt-4 space-y-2 font-mono text-sm">
+              <ul class="mt-4 space-y-2.5 font-mono text-sm">
                 <li class="flex items-center gap-2.5 text-body"><span class="text-positive">✓</span> Workout</li>
                 <li class="flex items-center gap-2.5 text-body"><span class="text-positive">✓</span> Reading</li>
                 <li class="flex items-center gap-2.5 text-body"><span class="text-positive">✓</span> Meditation</li>
+              </ul>
+              <ul class="mt-2.5 space-y-2.5 border-t border-hairline pt-2.5 font-mono text-sm">
                 <li class="flex items-center gap-2.5 text-body"><span class="text-negative">✗</span> Doomscrolling</li>
                 <li class="flex items-center gap-2.5 text-body"><span class="text-negative">✗</span> Gambling</li>
                 <li class="flex items-center gap-2.5 text-body"><span class="text-negative">✗</span> Poor sleep</li>

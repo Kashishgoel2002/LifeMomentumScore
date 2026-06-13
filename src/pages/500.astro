@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Something Went Wrong"
+  description="An unexpected error occurred. Head back home or open your dashboard to keep tracking your momentum."
+>
+  <section class="container-page flex min-h-[60vh] items-center justify-center py-20 text-center sm:py-28">
+    <div class="mx-auto max-w-lg">
+      <p class="eyebrow">Error 500</p>
+      <h1 class="mt-3 text-5xl font-semibold tracking-tight sm:text-6xl">Something went wrong.</h1>
+      <p class="mx-auto mt-5 max-w-md text-lg leading-relaxed text-body">
+        An unexpected error occurred on our end. Your data is safe on your device — try refreshing,
+        or head back to familiar ground.
+      </p>
+      <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href="/" class="btn btn-primary w-full sm:w-auto">Go Home</a>
+        <a href="/dashboard" class="btn btn-secondary w-full sm:w-auto">Open Dashboard</a>
+      </div>
+    </div>
+  </section>
+</Layout>

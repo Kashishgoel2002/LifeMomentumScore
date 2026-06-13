@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Life Momentum Score — measure the direction of your life">
+  <defs>
+    <radialGradient id="m1" cx="14%" cy="20%" r="55%"><stop offset="0" stop-color="#007cf0" stop-opacity="0.55"/><stop offset="1" stop-color="#007cf0" stop-opacity="0"/></radialGradient>
+    <radialGradient id="m2" cx="86%" cy="14%" r="50%"><stop offset="0" stop-color="#00dfd8" stop-opacity="0.5"/><stop offset="1" stop-color="#00dfd8" stop-opacity="0"/></radialGradient>
+    <radialGradient id="m3" cx="24%" cy="86%" r="58%"><stop offset="0" stop-color="#7928ca" stop-opacity="0.5"/><stop offset="1" stop-color="#7928ca" stop-opacity="0"/></radialGradient>
+    <radialGradient id="m4" cx="88%" cy="80%" r="52%"><stop offset="0" stop-color="#ff0080" stop-opacity="0.45"/><stop offset="1" stop-color="#ff0080" stop-opacity="0"/></radialGradient>
+    <radialGradient id="m5" cx="58%" cy="46%" r="46%"><stop offset="0" stop-color="#f9cb28" stop-opacity="0.28"/><stop offset="1" stop-color="#f9cb28" stop-opacity="0"/></radialGradient>
+    <clipPath id="logoClip"><rect width="80" height="80" rx="20"/></clipPath>
+    <radialGradient id="l1" cx="18%" cy="22%" r="48%"><stop offset="0" stop-color="#007cf0"/><stop offset="1" stop-color="#007cf0" stop-opacity="0"/></radialGradient>
+    <radialGradient id="l2" cx="78%" cy="18%" r="46%"><stop offset="0" stop-color="#00dfd8"/><stop offset="1" stop-color="#00dfd8" stop-opacity="0"/></radialGradient>
+    <radialGradient id="l3" cx="30%" cy="75%" r="52%"><stop offset="0" stop-color="#7928ca"/><stop offset="1" stop-color="#7928ca" stop-opacity="0"/></radialGradient>
+    <radialGradient id="l4" cx="82%" cy="70%" r="48%"><stop offset="0" stop-color="#ff0080"/><stop offset="1" stop-color="#ff0080" stop-opacity="0"/></radialGradient>
+    <radialGradient id="l5" cx="55%" cy="45%" r="44%"><stop offset="0" stop-color="#f9cb28"/><stop offset="1" stop-color="#f9cb28" stop-opacity="0"/></radialGradient>
+  </defs>
+
+  <!-- Canvas + atmospheric mesh -->
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+  <rect width="1200" height="630" fill="url(#m3)"/>
+  <rect width="1200" height="630" fill="url(#m1)"/>
+  <rect width="1200" height="630" fill="url(#m4)"/>
+  <rect width="1200" height="630" fill="url(#m2)"/>
+  <rect width="1200" height="630" fill="url(#m5)"/>
+
+  <!-- Inset hairline frame -->
+  <rect x="24" y="24" width="1152" height="582" rx="24" fill="none" stroke="#ffffff" stroke-opacity="0.10" stroke-width="2"/>
+
+  <!-- Brand lockup: logo mark + wordmark -->
+  <g transform="translate(96 92)">
+    <g clip-path="url(#logoClip)">
+      <rect width="80" height="80" fill="#0a0a0a"/>
+      <rect width="80" height="80" fill="url(#l3)"/>
+      <rect width="80" height="80" fill="url(#l1)"/>
+      <rect width="80" height="80" fill="url(#l4)"/>
+      <rect width="80" height="80" fill="url(#l2)"/>
+      <rect width="80" height="80" fill="url(#l5)"/>
+    </g>
+    <g transform="translate(17.5 17.5) scale(1.40625)">
+      <path d="M7 25L24 8M13 8H24V19" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="104" y="52" font-family="Geist, 'Segoe UI', Arial, sans-serif" font-size="34" font-weight="600" letter-spacing="-0.5" fill="#ededed">Life Momentum Score</text>
+  </g>
+
+  <!-- Headline -->
+  <text x="96" y="330" font-family="Geist, 'Segoe UI', Arial, sans-serif" font-size="86" font-weight="600" letter-spacing="-3" fill="#ffffff">Measure the direction</text>
+  <text x="96" y="430" font-family="Geist, 'Segoe UI', Arial, sans-serif" font-size="86" font-weight="600" letter-spacing="-3" fill="#ffffff">of your life.</text>
+
+  <!-- Supporting line -->
+  <text x="98" y="506" font-family="Geist, 'Segoe UI', Arial, sans-serif" font-size="30" font-weight="400" letter-spacing="-0.3" fill="#b0b0b0">Track positive &amp; negative habits. See your net momentum.</text>
+
+  <!-- Footer row: positive / negative chips + url -->
+  <g transform="translate(96 556)" font-family="Geist Mono, 'Segoe UI', Arial, sans-serif" font-size="24">
+    <circle cx="9" cy="-8" r="9" fill="#3ecf8e"/>
+    <text x="28" y="0" font-weight="500" fill="#8a8a8a">Good adds</text>
+    <circle cx="186" cy="-8" r="9" fill="#f76b6b"/>
+    <text x="205" y="0" font-weight="500" fill="#8a8a8a">Bad subtracts</text>
+  </g>
+  <text x="1104" y="556" text-anchor="end" font-family="Geist Mono, 'Segoe UI', Arial, sans-serif" font-size="24" font-weight="500" fill="#c8c8c8">lifemomentumscore.com</text>
+</svg>

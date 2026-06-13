@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const updated = 'June 2026';
+---
+
+<Layout
+  title="Terms & Conditions"
+  description="The terms for using Life Momentum Score — a free productivity and self-improvement tool. Plain, simple, and no surprises."
+>
+  <article class="container-page py-20 sm:py-24">
+    <div class="mx-auto max-w-2xl">
+      <p class="eyebrow">Legal</p>
+      <h1 class="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">Terms &amp; Conditions</h1>
+      <p class="mt-4 text-sm text-mute">Last updated: {updated}</p>
+
+      <p class="mt-8 text-lg leading-relaxed text-body">
+        By using Life Momentum Score, you agree to the terms below. We've kept them short and
+        readable on purpose.
+      </p>
+
+      <div class="mt-12 space-y-10">
+        <section>
+          <h2 class="text-xl font-semibold tracking-tight text-ink">What this is</h2>
+          <p class="mt-3 text-base leading-relaxed text-body">
+            Life Momentum Score is a free productivity and self-improvement tool that helps you
+            track positive and negative habits and see the net direction of your behavior over
+            time. It is intended for personal reflection and habit awareness.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold tracking-tight text-ink">No guarantees of results</h2>
+          <p class="mt-3 text-base leading-relaxed text-body">
+            The tool can help you notice patterns, but it cannot do the work for you. We make no
+            promises or guarantees about any specific outcome, improvement, or result you may or may
+            not achieve from using it.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold tracking-tight text-ink">Your decisions are your own</h2>
+          <p class="mt-3 text-base leading-relaxed text-body">
+            You are responsible for your own choices, decisions, and actions. Life Momentum Score is
+            not a substitute for professional medical, psychological, financial, or other expert
+            advice. Use your own judgment, and consult a qualified professional where appropriate.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold tracking-tight text-ink">The service may evolve</h2>
+          <p class="mt-3 text-base leading-relaxed text-body">
+            We may add, change, or remove features over time as the product develops. We may also
+            update these terms; when we do, we'll revise the date above. Continuing to use the tool
+            after a change means you accept the updated terms.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold tracking-tight text-ink">Provided “as is”</h2>
+          <p class="mt-3 text-base leading-relaxed text-body">
+            Life Momentum Score is provided as is, without warranties of any kind, whether express
+            or implied. To the fullest extent permitted by law, we are not liable for any loss or
+            damage arising from your use of the tool. Since your data is stored locally in your
+            browser, keeping your own backups is your responsibility.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold tracking-tight text-ink">Questions</h2>
+          <p class="mt-3 text-base leading-relaxed text-body">
+            If you have any questions about these terms, you can reach us through
+            <a href="/contact" class="text-ink underline underline-offset-4 hover:text-ink">our contact page</a>.
+          </p>
+        </section>
+      </div>
+
+      <div class="mt-14 flex flex-col gap-3 sm:flex-row">
+        <a href="/dashboard" class="btn btn-primary inline-flex">Start Tracking</a>
+        <a href="/privacy" class="btn btn-secondary inline-flex">Read the Privacy Policy</a>
+      </div>
+    </div>
+  </article>
+</Layout>

@@ -1,0 +1,72 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const email = 'lifemomentumscore@gmail.com';
+const reasons = [
+  {
+    title: 'Feedback',
+    body: 'Tell us what works, what feels off, and what you wish the tool did differently. Real feedback shapes where this goes next.',
+  },
+  {
+    title: 'Bug reports',
+    body: 'Something not behaving as expected? Let us know what happened, your browser, and the steps that led to it.',
+  },
+  {
+    title: 'Feature suggestions',
+    body: 'Have an idea for a habit, a mode, or a way to view your momentum? We genuinely want to hear it.',
+  },
+  {
+    title: 'General inquiries',
+    body: 'Questions about how Life Momentum Score works, privacy, or anything else — just ask.',
+  },
+];
+---
+
+<Layout
+  title="Contact Us"
+  description="Get in touch with the Life Momentum Score team — share feedback, report a bug, suggest a feature, or ask a question by email."
+>
+  <article class="container-page py-20 sm:py-24">
+    <div class="mx-auto max-w-2xl">
+      <p class="eyebrow">Contact</p>
+      <h1 class="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">We'd love to hear from you.</h1>
+      <p class="mt-5 text-lg leading-relaxed text-body">
+        Life Momentum Score is built for people who want an honest look at their habits — and it
+        gets better when those people speak up. Whatever's on your mind, the inbox is open.
+      </p>
+
+      <!-- Email card -->
+      <div class="card mt-10 p-6 sm:p-8">
+        <p class="eyebrow">Email us</p>
+        <a
+          href={`mailto:${email}`}
+          class="mt-3 block break-all text-2xl font-semibold tracking-tight text-ink underline-offset-4 hover:underline sm:text-3xl"
+        >
+          {email}
+        </a>
+        <p class="mt-4 text-sm leading-relaxed text-body">
+          We read every message. We're a small effort, so replies may take a little time — thanks
+          for your patience.
+        </p>
+      </div>
+
+      <!-- What to reach out about -->
+      <div class="mt-12">
+        <h2 class="text-xl font-semibold tracking-tight text-ink">What to reach out about</h2>
+        <div class="mt-6 grid gap-4 sm:grid-cols-2">
+          {reasons.map((r) => (
+            <div class="card p-5">
+              <p class="text-base font-medium text-ink">{r.title}</p>
+              <p class="mt-2 text-sm leading-relaxed text-body">{r.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="mt-14 flex flex-col gap-3 sm:flex-row">
+        <a href={`mailto:${email}`} class="btn btn-primary inline-flex">Send an email</a>
+        <a href="/dashboard" class="btn btn-secondary inline-flex">Back to tracking</a>
+      </div>
+    </div>
+  </article>
+</Layout>

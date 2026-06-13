@@ -7,11 +7,13 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title?: string;
   description?: string;
+  /** Social share image override; defaults to the branded OG card. */
+  image?: string;
   /** When true, omits the chrome (used by none currently, reserved). */
   bare?: boolean;
 }
 
-const { title, description, bare = false } = Astro.props;
+const { title, description, image, bare = false } = Astro.props;
 const path = Astro.url.pathname;
 ---
 
@@ -33,7 +35,7 @@ const path = Astro.url.pathname;
       href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
     />
 
-    <Seo title={title} description={description} path={path} />
+    <Seo title={title} description={description} path={path} image={image} />
   </head>
   <body class="flex min-h-screen flex-col bg-canvas text-ink">
     <a
