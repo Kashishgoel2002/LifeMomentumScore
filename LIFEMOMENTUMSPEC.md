@@ -1485,3 +1485,127 @@ After implementation:
 Do not commit.
 Do not push.
 Wait for approval after implementation.
+
+
+Improvement in email:
+
+# Contact Page Improvement — Email Fallback
+
+The Contact page email implementation is already correct and should remain unchanged.
+
+Current implementation:
+
+```html
+mailto:lifemomentumscore@gmail.com
+```
+
+Do NOT remove or modify the existing mailto functionality.
+
+---
+
+## Issue
+
+Some users may not have a properly configured email handler.
+
+In those cases:
+
+* Clicking the email address may not open a compose window.
+* Clicking the "Send an email" button may not open a compose window.
+* Users may not know how to contact us despite the email being visible.
+
+---
+
+## Solution
+
+Add a secondary fallback option.
+
+### New Button
+
+Add:
+
+```text
+Copy Email
+```
+
+next to the existing:
+
+```text
+Send an email
+```
+
+button.
+
+Maintain the current design language.
+
+The button should feel secondary and subtle.
+
+---
+
+## Behavior
+
+When clicked:
+
+1. Copy:
+
+```text
+lifemomentumscore@gmail.com
+```
+
+to the clipboard.
+
+2. Show a lightweight success confirmation.
+
+Example:
+
+```text
+Email copied
+```
+
+or
+
+```text
+Copied to clipboard
+```
+
+3. Success message should disappear automatically after a few seconds.
+
+No page reload.
+
+No modal.
+
+No alert popup.
+
+---
+
+## Important
+
+Keep the existing:
+
+```text
+mailto:lifemomentumscore@gmail.com
+```
+
+implementation exactly as it is.
+
+This is an addition, not a replacement.
+
+Users should have both options:
+
+* Send Email
+* Copy Email
+
+---
+
+## Validation
+
+After implementation:
+
+1. Verify Send Email still works.
+2. Verify Copy Email copies:
+   [lifemomentumscore@gmail.com](mailto:lifemomentumscore@gmail.com)
+3. Verify success message appears.
+4. Verify success message disappears automatically.
+5. Verify mobile layout remains clean.
+6. Report modified files.
+
+Do not make any other design or content changes.

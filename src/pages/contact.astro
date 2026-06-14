@@ -63,10 +63,65 @@ const reasons = [
         </div>
       </div>
 
-      <div class="mt-14 flex flex-col gap-3 sm:flex-row">
+      <div class="mt-14 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
         <a href={`mailto:${email}`} class="btn btn-primary inline-flex">Send an email</a>
+        <button
+          id="copy-email"
+          type="button"
+          data-email={email}
+          class="btn btn-secondary inline-flex"
+        >
+          Copy email
+        </button>
         <a href="/dashboard" class="btn btn-secondary inline-flex">Back to tracking</a>
+        <span
+          id="copy-email-status"
+          role="status"
+          aria-live="polite"
+          class="text-sm font-medium text-body opacity-0 transition-opacity duration-200"
+        >
+          Email copied
+        </span>
       </div>
     </div>
   </article>
+
+  <script>
+    const button = document.getElementById('copy-email');
+    const status = document.getElementById('copy-email-status');
+    let hideTimer;
+
+    if (button && status) {
+      button.addEventListener('click', async () => {
+        const email = button.dataset.email || '';
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(email);
+          } else {
+            const temp = document.createElement('textarea');
+            temp.value = email;
+            temp.style.position = 'fixed';
+            temp.style.opacity = '0';
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+          }
+          status.textContent = 'Email copied';
+          status.style.opacity = '1';
+          clearTimeout(hideTimer);
+          hideTimer = window.setTimeout(() => {
+            status.style.opacity = '0';
+          }, 2500);
+        } catch (err) {
+          status.textContent = 'Press Ctrl+C to copy';
+          status.style.opacity = '1';
+          clearTimeout(hideTimer);
+          hideTimer = window.setTimeout(() => {
+            status.style.opacity = '0';
+          }, 2500);
+        }
+      });
+    }
+  </script>
 </Layout>
